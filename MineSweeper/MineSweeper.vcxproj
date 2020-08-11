@@ -21,12 +21,18 @@
   <ItemGroup>
     <ClCompile Include="cApp.cpp" />
     <ClCompile Include="cMain.cpp" />
-    <ClCompile Include="Coords.cpp" />
+    <ClCompile Include="MineSweeperBase.cpp" />
+    <ClCompile Include="MineSweeperField.cpp" />
+    <ClCompile Include="MineSweeperLogic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cApp.h" />
     <ClInclude Include="cMain.h" />
-    <ClInclude Include="Coords.h" />
+    <ClInclude Include="IndependentMineSweeper.h" />
+    <ClInclude Include="MineSweeperBase.h" />
+    <ClInclude Include="MineSweeperEnums.h" />
+    <ClInclude Include="MineSweeperField.h" />
+    <ClInclude Include="MineSweeperLogic.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

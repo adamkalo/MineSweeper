@@ -21,7 +21,13 @@
     <ClCompile Include="cMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Coords.cpp">
+    <ClCompile Include="MineSweeperField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MineSweeperLogic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MineSweeperBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,7 +38,19 @@
     <ClInclude Include="cMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Coords.h">
+    <ClInclude Include="MineSweeperField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MineSweeperEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MineSweeperLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MineSweeperBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IndependentMineSweeper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

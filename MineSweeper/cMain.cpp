@@ -49,13 +49,10 @@ void cMain::on_left_button_clicked(wxEvent& evt)
 
 
 	Coords coords((evt.GetId() - BUTTON_BASE_ID) % mine_field_height, (evt.GetId() - BUTTON_BASE_ID) / mine_field_height);
-	int mine_num = get_array_num_from_coords(coords);
 
 	if (first_click)
 	{
 		init_minesweeper(coords);
-		set_minefield();
-		//debug_show_labels();
 	}
 
 	if(bts_mines[mine_num]->GetLabel() != "X")
@@ -108,10 +105,6 @@ void cMain::on_right_button_clicked(wxEvent& evt)
 	evt.Skip();
 }
 
-int cMain::get_array_num_from_coords(Coords coords)
-{
-	return coords.y*mine_field_height+coords.x;
-}
 
 void cMain::init_minesweeper(Coords coords)
 {
@@ -131,26 +124,9 @@ void cMain::init_minesweeper(Coords coords)
 			mine_values[get_array_num_from_coords(mcoords)] = -1;
 			mines--;
 		}
-	}
-
-	
-	
+	}	
 }
 
-void cMain::set_minefield()
-{
-	for (int x = 0; x < mine_field_width; x++)
-	{
-		for (int y = 0; y < mine_field_height; y++)
-		{
-			Coords coords(x, y);
-			if (mine_values[get_array_num_from_coords(coords)] != -1)
-			{
-				mine_values[get_array_num_from_coords(coords)] = search_neighbours(coords);
-			}
-		}
-	}
-}
 
 void cMain::reset_minesweeper(wxString mes)
 {
@@ -170,80 +146,5 @@ void cMain::reset_minesweeper(wxString mes)
 	}
 }
 
-int cMain::search_neighbours(Coords coords)
-{
-	int mine_count = 0;
-	for (int i = -1; i < 2; i++)
-	{
-		for (int j = -1; j < 2; j++)
-		{
-			Coords mcoords(coords.x+i, coords.y+j);
 
-			if (field_isvalid(mcoords) && coords != mcoords)
-			{
-				int test = mine_values[get_array_num_from_coords(mcoords)];
-				if (mine_values[get_array_num_from_coords(mcoords)] == -1)
-					mine_count++;
-			}
-		}
-	}
-	return mine_count;
-}
 
-bool cMain::field_isvalid(Coords coords)
-{
-	return ((coords.x >= 0) && (coords.x < mine_field_width) && (coords.y >= 0) && (coords.y < mine_field_height));
-}
-
-void cMain::disable_zero_fields()
-{
-	if (!zero_elements.empty())
-	{
-		Coords coords = zero_elements.front();
-		zero_elements.pop();
-		bts_mines[get_array_num_from_coords(coords)]->Enable(false);
-		found_safe_places++;
-		search_for_zeros(coords);
-		disable_zero_fields();
-	}
-}
-
-void cMain::search_for_zeros(Coords coords)
-{
-	for (int i = -1; i < 2; i++)
-	{
-		for (int j = -1; j < 2; j++)
-		{
-			Coords mcoords(coords.x + i, coords.y + j);
-			if (field_isvalid(mcoords) && mcoords != coords)
-			{
-				if (mine_values[get_array_num_from_coords(mcoords)] == 0 && bts_mines[get_array_num_from_coords(mcoords)]->IsEnabled())
-					zero_elements.push(mcoords);
-				else if (mine_values[get_array_num_from_coords(mcoords)] > 0 && bts_mines[get_array_num_from_coords(mcoords)]->IsEnabled())
-				{
-					bts_mines[get_array_num_from_coords(mcoords)]->Enable(false);
-					found_safe_places++;
-					bts_mines[get_array_num_from_coords(mcoords)]->SetLabel(std::to_string(mine_values[get_array_num_from_coords(mcoords)]));
-
-				}
-			}
-		}
-	}
-}
-
-bool cMain::all_zones_cleared()
-{
-	return found_safe_places == mine_field_height*mine_field_width-number_of_mines;
-}
-
-void cMain::debug_show_labels()
-{
-	for (int x = 0; x < mine_field_width; x++)
-	{
-		for (int y = 0; y < mine_field_height; y++)
-		{
-			Coords coords(x, y);
-			bts_mines[get_array_num_from_coords(coords)]->SetLabel(std::to_string(mine_values[get_array_num_from_coords(coords)]));
-		}
-	}
-}
