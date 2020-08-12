@@ -11,7 +11,7 @@ public:
 	MineSweeperField() = default;
 	~MineSweeperField();
 
-	const int& operator[](std::size_t idx) { return field_values[idx]; }
+	const int& operator[](std::size_t idx) { int ret = field_values[idx]; return ret; }
 
 	const int& operator[](std::pair<int, int> coord) { return field_values[CoordinatesToIndex(coord)]; }
 

@@ -24,7 +24,7 @@ void MineSweeperField::plantMines()
 
 	while (mines)
 	{
-		int try_index = rand() % mine_field_width * mine_field_height;
+		int try_index = rand() % (mine_field_width * mine_field_height);
 
 		if (field_values[try_index] == CLEAR)
 		{

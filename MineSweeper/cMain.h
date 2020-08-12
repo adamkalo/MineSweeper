@@ -15,9 +15,6 @@ public:
 
 private:
 	
-	
-	void init_minesweeper();
-	
 	void reset_minesweeper(wxString mes);
 
 private:

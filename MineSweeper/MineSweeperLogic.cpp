@@ -45,12 +45,22 @@ std::pair<int, bool> MineSweeperLogic::OnLeftClickEvent(std::pair<int, int> coor
 	return OnLeftClickEvent(CoordinatesToIndex(coord));
 }
 
-bool MineSweeperLogic::OnRightClickEvent(int index)
+int MineSweeperLogic::OnRightClickEvent(int index)
 {
-	return false;
+	if (field_state[index] == ACTIVE)
+	{
+		field_state[index] = MARKED;
+		return MARKED;
+	}
+	else if (field_state[index] == MARKED)
+	{
+		field_state[index] = ACTIVE;
+		return ACTIVE;
+	}
+	return 42;
 }
 
-bool MineSweeperLogic::OnRightClickEvent(std::pair<int, int> coord)
+int MineSweeperLogic::OnRightClickEvent(std::pair<int, int> coord)
 {
 	return OnRightClickEvent(CoordinatesToIndex(coord));
 }
